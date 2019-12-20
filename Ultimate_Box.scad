@@ -125,24 +125,24 @@ FootFilet = FootHeight/4;
 // Foot centers are specified as distance from PCB back-left corner.
 // X is along the "length" axis, and Y is along the "width" axis.
 // - Foot 1 distance from back PCB edge
-Foot1X = 4.116265;
+Foot1X = 4;
 // - Foot 1 distance from left PCB edge
-Foot1Y = 4.90687;
+Foot1Y = 4;
 // - Foot 2 distance from back PCB edge
-Foot2X = 4.116265;;
+Foot2X = 4;;
 // - Foot 2 distance from right PCB edge
-Foot2YFromEdge = 4.90687;;
+Foot2YFromEdge = 4;
 Foot2Y = PCBWidth - Foot2YFromEdge;
 // - Foot 3 distance from front PCB edge
-Foot3XFromEdge = 4.116265;
+Foot3XFromEdge = 4;
 Foot3X = PCBLength - Foot3XFromEdge;
 // - Foot 3 distance from left PCB edge
-Foot3Y = 4.90687;
+Foot3Y = 4;
 // - Foot 4 distance from front PCB edge
-Foot4XFromEdge = 4.116265;
+Foot4XFromEdge = 4;
 Foot4X = PCBLength - Foot4XFromEdge;
 // - Foot 4 distance from right PCB edge
-Foot4YFromEdge = 4.90687;
+Foot4YFromEdge = 4;
 Foot4Y = PCBWidth - Foot4YFromEdge;
 
 
@@ -227,7 +227,7 @@ module FPanelHoles() {
     SquareHole(1, 14 + 9.6164, 1 + 10.7, 7, 7, 1);
     SquareHole(1, 31.6164, 15.7, 22.5, 14, 1);
     // CylinderHole(On/Off, Xpos, Ypos, Diameter)
-    CylinderHole(1, 14.6164, 22.7, 10);
+    CylinderHole(1, 14.6164, 22.7, 12);
     CylinderHole(1, 70.1164, 23.2, 8);
     CylinderHole(1, 17.5 + 9.6164, 11.5 + 10.7, 5);
     //SquareHole(1, 20, 50, 80, 30, 3);
@@ -250,10 +250,13 @@ module FPanelText() {
 
 // Holes for back panel
 module BPanelHoles() {
-    SquareHole(1, 86.2328 - 11 - 9.6164, 10 + 10.7 - 5, 11.5, 18, 1);
-    SquareHole(1, 12 + 9.6164, 10 + 10.7, 23, 13, 1);
-    CylinderHole(1, 8 + 9.6164, 16 + 10.7, 6);
-    CylinderHole(1, 39 + 9.6164, 16 + 10.7, 6);
+    SquareHole(1, 86.2328 - 11 - 9.6164, 11.95, 11.5, 18, 1);
+    SquareHole(1, 12 + 9.6164, 11.95, 27, 19, 1);
+    // wigth = 50, left = 2 
+    // radius = 3
+    // 
+    CylinderHole(1, 3 + 9.6164, 22.2, 8);
+    CylinderHole(1, 47 + 9.6164, 22.2, 8);
 }
 
 
