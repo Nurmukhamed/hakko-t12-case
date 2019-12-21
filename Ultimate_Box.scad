@@ -250,13 +250,13 @@ module FPanelText() {
 
 // Holes for back panel
 module BPanelHoles() {
-    SquareHole(1, 86.2328 - 11 - 9.6164, 11.95, 11.5, 18, 1);
+    SquareHole(1, 86.2328 - 11 - 9.6164, 11.95, 12.2, 18.5, 1);
     SquareHole(1, 12 + 9.6164, 11.95, 27, 19, 1);
     // wigth = 50, left = 2 
     // radius = 3
     // 
-    CylinderHole(1, 3 + 9.6164, 22.2, 8);
-    CylinderHole(1, 47 + 9.6164, 22.2, 8);
+    CylinderHole(1, 4.7 + 9.6164, 22.2, 2.52);
+    CylinderHole(1, 45.7 + 9.6164, 22.2, 2.52);
 }
 
 
