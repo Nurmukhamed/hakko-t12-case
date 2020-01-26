@@ -87,7 +87,7 @@ FLTab = 1; // [0:Bottom, 1:Top]
 // Front right tab
 FRTab = 1; // [0:Bottom, 1:Top]
 // EXPERIMENTAL: Snap tabs
-SnapTabs = 0; // [0:Screws, 1:Snaps]
+SnapTabs = 1; // [0:Screws, 1:Snaps]
 
 
 /* [PCB options] */
@@ -100,9 +100,9 @@ PCBThick = 1.6;
 // You likely need to maintain |TabThick| margin on the left and right for tabs
 // and whatnot.
 // - Margin between front panel and PCB
-FrontEdgeMargin = 15;
+FrontEdgeMargin = 35;
 // - Margin between back panel and PCB
-BackEdgeMargin = 15;
+BackEdgeMargin = 35;
 // - Margin between left wall and PCB
 LeftEdgeMargin = 15;
 // - Margin between right wall and PCB
