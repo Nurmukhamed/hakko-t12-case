@@ -73,7 +73,7 @@ PanelHorizontalGap = CutoutMargin + PartMargin;
 
 /* [Box Fixation Tabs] */
 // - Side screw hole (or snap) diameter
-ScrewHole = 2.2606;
+ScrewHole = 1.2606;
 // - Screw thread major diameter for outer shell
 BoxHole = 2.8448;
 // Thickness of fixation tabs
@@ -92,23 +92,23 @@ SnapTabs = 1; // [0:Screws, 1:Snaps]
 
 /* [PCB options] */
 // - PCB Length
-PCBLength = 106.42605;
+PCBLength = 84;
 // - PCB Width
-PCBWidth = 57.03279;
+PCBWidth = 57;
 // - PCB Thickness
 PCBThick = 1.6;
 // You likely need to maintain |TabThick| margin on the left and right for tabs
 // and whatnot.
 // - Margin between front panel and PCB
-FrontEdgeMargin = 35;
+FrontEdgeMargin = 20;
 // - Margin between back panel and PCB
-BackEdgeMargin = 35;
+BackEdgeMargin = 20;
 // - Margin between left wall and PCB
-LeftEdgeMargin = 15;
+LeftEdgeMargin = 25;
 // - Margin between right wall and PCB
-RightEdgeMargin = 15;
+RightEdgeMargin = 25;
 // - Margin between top of PCB and box top.
-TopMargin = 35;
+TopMargin = 50;
 
 
 /* [PCB_Feet] */
@@ -125,24 +125,24 @@ FootFilet = FootHeight/4;
 // Foot centers are specified as distance from PCB back-left corner.
 // X is along the "length" axis, and Y is along the "width" axis.
 // - Foot 1 distance from back PCB edge
-Foot1X = 4;
+Foot1X = 13.5;
 // - Foot 1 distance from left PCB edge
-Foot1Y = 4;
+Foot1Y = 7.5;
 // - Foot 2 distance from back PCB edge
-Foot2X = 4;;
+Foot2X = 13.5;
 // - Foot 2 distance from right PCB edge
-Foot2YFromEdge = 4;
+Foot2YFromEdge = 7.5;
 Foot2Y = PCBWidth - Foot2YFromEdge;
 // - Foot 3 distance from front PCB edge
-Foot3XFromEdge = 4;
+Foot3XFromEdge = 13.5;
 Foot3X = PCBLength - Foot3XFromEdge;
 // - Foot 3 distance from left PCB edge
-Foot3Y = 4;
+Foot3Y = 7.5;
 // - Foot 4 distance from front PCB edge
-Foot4XFromEdge = 4;
+Foot4XFromEdge = 13.5;
 Foot4X = PCBLength - Foot4XFromEdge;
 // - Foot 4 distance from right PCB edge
-Foot4YFromEdge = 4;
+Foot4YFromEdge = 7.5;
 Foot4Y = PCBWidth - Foot4YFromEdge;
 
 
@@ -222,14 +222,34 @@ PanelRightEdge = PanelWidth - Thick + PanelHorizontalGap;
 
 // Holes for front panel
 module FPanelHoles() {
-    // SquareHole(On/Off, Xpos,Ypos,Length,Width,Filet)
-    //SquareHole(1, 70.1164, 27.2, 13, 13, 1);
-    SquareHole(1, 14 + 9.6164, 1 + 10.7, 7, 7, 1);
-    SquareHole(1, 31.6164, 15.7, 22.5, 14, 1);
+    FrontPanelWidth    = 106.2;
+    FrontPanelHeight   = 59.4;
+    StationPcbWidth   = 63.3;
+    StationPcbHeight  = 30;
+    PcbDisplayWidth   = 35;
+    PcbDisplayHeight  = 28;
+    EncoderDiameter   = 8;
+    GX16Diameter      = 11;
+    SpaceWidth        = 15;
+
+    // GX16-8 
+    XPosGX16   = SpaceWidth+GX16Diameter/2;
+    YPosGX16   = FrontPanelHeight/2;
     // CylinderHole(On/Off, Xpos, Ypos, Diameter)
-    CylinderHole(1, 14.6164, 22.7, 12);
-    CylinderHole(1, 70.1164, 23.2, 8);
-    CylinderHole(1, 17.5 + 9.6164, 11.5 + 10.7, 5);
+    CylinderHole(1, XPosGX16, YPosGX16, GX16Diameter);
+
+    //Display
+    XPosDisplay = SpaceWidth*2 + GX16Diameter;
+    YPosDisplay = (FrontPanelHeight - StationPcbHeight)/2 + 5;
+    // SquareHole(On/Off, Xpos,Ypos,Length,Width,Filet)
+    SquareHole(1, XPosDisplay, YPosDisplay, PcbDisplayWidth, PcbDisplayHeight, 0);
+
+    // Encoder
+    XPosEncoder = SpaceWidth*2 + GX16Diameter + StationPcbWidth -EncoderDiameter -2;
+    YPosEncoder = FrontPanelHeight/2;
+    // CylinderHole(On/Off, Xpos, Ypos, Diameter)
+    CylinderHole(1, XPosEncoder, YPosEncoder, EncoderDiameter);
+    //CylinderHole(1, 17.5 + 9.6164, 11.5 + 10.7, 5);
     //SquareHole(1, 20, 50, 80, 30, 3);
     //CylinderHole(1, 93, 30, 10);
     //SquareHole(1, 120, 20, 30, 60, 3);
@@ -250,13 +270,23 @@ module FPanelText() {
 
 // Holes for back panel
 module BPanelHoles() {
-    SquareHole(1, 86.2328 - 11 - 9.6164, 11.95, 12.2, 18.5, 1);
-    SquareHole(1, 12 + 9.6164, 11.95, 27, 19, 1);
-    // wigth = 50, left = 2 
-    // radius = 3
-    // 
-    CylinderHole(1, 4.7 + 9.6164, 22.2, 2.52);
-    CylinderHole(1, 45.7 + 9.6164, 22.2, 2.52);
+    BackPanelWidth    = 106.2;
+    BackPanelHeight   = 59.4;
+    PowerSupplyWidth  = 47.5;
+    PowerSupplyHeight = 27;
+    FanSwitchWidth    = 14;
+    FanSwitchHeight   = 17;
+    SpaceWidth        = 15;
+
+    XPosPowerSupply   = (BackPanelWidth - PowerSupplyWidth - FanSwitchWidth - SpaceWidth)/2;
+    YPosPowerSupply   = (BackPanelHeight - PowerSupplyHeight)/2;
+
+    XPosFanSwitch     = XPosPowerSupply + PowerSupplyWidth + SpaceWidth;
+    YPosFanSwitch     = (BackPanelHeight - FanSwitchHeight)/2;
+    
+    SquareHole(1, XPosPowerSupply, YPosPowerSupply, PowerSupplyWidth, PowerSupplyHeight, 1);
+    SquareHole(1, XPosFanSwitch, YPosFanSwitch, FanSwitchWidth, FanSwitchHeight, 1);
+    
 }
 
 
