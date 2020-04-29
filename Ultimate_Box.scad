@@ -152,9 +152,9 @@ TShell = 0; // [0:No, 1:Yes]
 // - Bottom shell
 BShell = 0; // [0:No, 1:Yes]
 // - Front panel
-FPanL = 0; // [0:No, 1:Yes]
+FPanL = 1; // [0:No, 1:Yes]
 // - Back panel
-BPanL = 1; // [0:No, 1:Yes]
+BPanL = 0; // [0:No, 1:Yes]
 // - Panel holes and text
 PanelFeatures = 1; // [0:No, 1:Yes]
 
@@ -222,37 +222,44 @@ PanelRightEdge = PanelWidth - Thick + PanelHorizontalGap;
 
 // Holes for front panel
 module FPanelHoles() {
-    FrontPanelWidth    = 106.2;
-    FrontPanelHeight   = 59.4;
-    StationPcbWidth   = 63.3;
-    StationPcbHeight  = 30;
-    PcbDisplayWidth   = 35;
-    PcbDisplayHeight  = 28;
-    EncoderDiameter   = 8;
-    GX16Diameter      = 11;
-    SpaceWidth        = 15;
+    FrontPanelWidth      = 106.2;
+    FrontPanelHeight     = 59.4;
+    StationPcbWidth      = 63.3;
+    StationPcbHeight     = 30;
+    PcbDisplayWidth      = 35.2;
+    PcbDisplayHeight     = 23.2;
+    DisplayLeftMargin    = 6.5;
+    DisplayUpMargin      = 6.2;
+    DisplayMarginEncoder = 14;
+    
+    EncoderDiameter      = 8;
+    EncoderRightMargin   = 7.4;
+    GX16Diameter         = 16;
 
+    SpaceWidth           = 15;
+    MarginFromSide       = 10;
+
+    XPosStationPcbWidth  =  FrontPanelWidth - StationPcbWidth - MarginFromSide;
+    YPosStationPcbHeight =  (FrontPanelHeight - StationPcbHeight)/2;
+    
+    
     // GX16-8 
-    XPosGX16   = SpaceWidth+GX16Diameter/2;
-    YPosGX16   = FrontPanelHeight/2;
+    XPosGX16   = XPosStationPcbWidth - SpaceWidth;
+    YPosGX16   = FrontPanelHeight/2 + 3.1;
     // CylinderHole(On/Off, Xpos, Ypos, Diameter)
     CylinderHole(1, XPosGX16, YPosGX16, GX16Diameter);
 
     //Display
-    XPosDisplay = SpaceWidth*2 + GX16Diameter;
-    YPosDisplay = (FrontPanelHeight - StationPcbHeight)/2 + 5;
+    XPosDisplay = XPosStationPcbWidth + DisplayLeftMargin;
+    YPosDisplay = YPosStationPcbHeight + DisplayUpMargin;
     // SquareHole(On/Off, Xpos,Ypos,Length,Width,Filet)
     SquareHole(1, XPosDisplay, YPosDisplay, PcbDisplayWidth, PcbDisplayHeight, 0);
 
     // Encoder
-    XPosEncoder = SpaceWidth*2 + GX16Diameter + StationPcbWidth -EncoderDiameter -2;
-    YPosEncoder = FrontPanelHeight/2;
+    XPosEncoder = XPosDisplay + PcbDisplayWidth + DisplayMarginEncoder;
+    YPosEncoder = FrontPanelHeight/2 + 3.1;
     // CylinderHole(On/Off, Xpos, Ypos, Diameter)
     CylinderHole(1, XPosEncoder, YPosEncoder, EncoderDiameter);
-    //CylinderHole(1, 17.5 + 9.6164, 11.5 + 10.7, 5);
-    //SquareHole(1, 20, 50, 80, 30, 3);
-    //CylinderHole(1, 93, 30, 10);
-    //SquareHole(1, 120, 20, 30, 60, 3);
 }
 
 
